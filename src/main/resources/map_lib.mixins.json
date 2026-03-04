@@ -1,0 +1,25 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.map_lib.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "EntityMixin",
+    "PlayerMixin"
+  ],
+  "client": [
+    "AbstractClientPlayerMixin",
+    "ClientLevelMixin",
+    "FogRendererMixin",
+    "GameRendererMixin",
+    "LevelRendererMixin",
+    "LocalPlayerMixin",
+    "MouseHandlerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}
