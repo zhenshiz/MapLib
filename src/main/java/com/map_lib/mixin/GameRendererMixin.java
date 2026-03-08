@@ -18,4 +18,12 @@ public class GameRendererMixin {
             ci.cancel();
         }
     }
+
+    // 在附身模式下隐藏玩家手部
+    @Inject(method = "renderItemInHand", at = @At("HEAD"), cancellable = true)
+    private void maplib$hideHandInPossessMode(CallbackInfo ci) {
+        if (MapLibClientData.possessedEntityId != -1) {
+            ci.cancel();
+        }
+    }
 }

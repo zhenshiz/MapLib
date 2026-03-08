@@ -49,7 +49,7 @@ public class InputCommandEvent {
         }
     }
 
-    // 杂项 / UI / 交互拦截：通过 Tick 事件提前“抽干”按键缓存
+    // 杂项 / UI / 交互拦截：通过 Tick 事件提前”抽干”按键缓存
     @SubscribeEvent
     public static void onClientTick(ClientTickEvent.Pre event) {
         Minecraft mc = Minecraft.getInstance();
@@ -59,9 +59,11 @@ public class InputCommandEvent {
             mc.options.keySprint.setDown(false);
             mc.player.setSprinting(false);
         }
-        if (MapLibClientData.isLocked(InputCommand.InputPermission.PERSPECTIVE)) drainKey(mc.options.keyTogglePerspective);
+        if (MapLibClientData.isLocked(InputCommand.InputPermission.PERSPECTIVE))
+            drainKey(mc.options.keyTogglePerspective);
         if (MapLibClientData.isLocked(InputCommand.InputPermission.SMOOTH_CAMERA)) drainKey(mc.options.keySmoothCamera);
-        if (MapLibClientData.isLocked(InputCommand.InputPermission.SOCIAL_INTERACTION)) drainKey(mc.options.keySocialInteractions);
+        if (MapLibClientData.isLocked(InputCommand.InputPermission.SOCIAL_INTERACTION))
+            drainKey(mc.options.keySocialInteractions);
         if (MapLibClientData.isLocked(InputCommand.InputPermission.INVENTORY)) drainKey(mc.options.keyInventory);
         if (MapLibClientData.isLocked(InputCommand.InputPermission.ADVANCEMENT)) drainKey(mc.options.keyAdvancements);
         if (MapLibClientData.isLocked(InputCommand.InputPermission.SWAP_HAND)) drainKey(mc.options.keySwapOffhand);

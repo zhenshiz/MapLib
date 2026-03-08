@@ -33,4 +33,7 @@ public class MapLibClientData {
 
     // 记录当前的自定义着色器，null 代表没有
     public static ResourceLocation customShader = null;
+
+    // 记录当前附身的实体 ID，-1 代表没有附身
+    public static int possessedEntityId = -1;
 }

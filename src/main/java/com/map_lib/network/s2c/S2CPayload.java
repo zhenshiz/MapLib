@@ -43,6 +43,7 @@ public class S2CPayload {
     public static final String STOP_SPEAKER = MOD_ID + "stop_speaker";
     public static final String STOP_SPEAKER_POS = MOD_ID + "stop_speaker_pos";
     public static final String RENDER_PATH = MOD_ID + "render_path";
+    public static final String SET_POSSESSED_ENTITY = MOD_ID + "set_possessed_entity";
 
     @RPCPacket(GLOW_ENTITY)
     public static void glowEntity(RPCSender sender, CompoundTag entityIdTag, boolean isGlowing, int color) {
@@ -162,5 +163,10 @@ public class S2CPayload {
     public static void renderPath(RPCSender sender, CompoundTag tag, ParticleOptions particle) {
         List<BlockPos> path = CodecUtil.deserializeNBT(CodecUtil.BLOCK_POS_LIST, tag.get("path"), Platform.getFrozenRegistry());
         ClientPathRenderer.updatePath(path, particle);
+    }
+
+    @RPCPacket(SET_POSSESSED_ENTITY)
+    public static void setPossessedEntity(RPCSender sender, int entityId) {
+        MapLibClientData.possessedEntityId = entityId;
     }
 }

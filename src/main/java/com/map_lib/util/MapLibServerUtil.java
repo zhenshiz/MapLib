@@ -181,7 +181,7 @@ public class MapLibServerUtil {
 
     @Info("""
             让指定坐标半径内的所有玩家屏幕震动 (可以做 Boss 落地的 AOE 震动)
-            
+
             level 服务端的世界
             center 坐标中心
             radius 范围
@@ -199,6 +199,25 @@ public class MapLibServerUtil {
                 RPCPacketDistributor.rpcToPlayer(player, S2CPayload.CAMERA_SHAkE, finalAmp, tick, shakeDecay);
             }
         }
+    }
+
+    @Info("""
+            让玩家摄像头附身到指定实体上
+
+            player 目标玩家
+            entity 要附身的实体
+            """)
+    public static void setPossessedEntity(ServerPlayer player, Entity entity) {
+        RPCPacketDistributor.rpcToPlayer(player, S2CPayload.SET_POSSESSED_ENTITY, entity.getId());
+    }
+
+    @Info("""
+            清除玩家的附身状态
+
+            player 目标玩家
+            """)
+    public static void clearPossessedEntity(ServerPlayer player) {
+        RPCPacketDistributor.rpcToPlayer(player, S2CPayload.SET_POSSESSED_ENTITY, -1);
     }
 
     //worldCommand

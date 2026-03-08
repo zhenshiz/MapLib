@@ -11,6 +11,9 @@ import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.SharedSuggestionProvider;
+import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.Entity;
 
 import java.util.Arrays;
 
@@ -34,6 +37,12 @@ public class CameraCommand implements ICommand {
                                 )
                         )
                 )
+                .then(Commands.literal("possess")
+                        .executes(this::unpossessEntity)
+                        .then(Commands.argument("entity", EntityArgument.entity())
+                                .executes(this::possessEntity)
+                        )
+                )
         );
     }
 
@@ -44,6 +53,28 @@ public class CameraCommand implements ICommand {
             String decay = StringArgumentType.getString(context, "decay");
             ShakeDecay shakeDecay = ShakeDecay.valueOf(decay.toUpperCase());
             MapLibServerUtil.cameraShake(player, amplitude, tick, shakeDecay);
+            return 1;
+        });
+    }
+
+    private int possessEntity(CommandContext<CommandSourceStack> context) {
+        return this.defaultPlayerRunCommand(context, player -> {
+            try {
+                Entity targetEntity = EntityArgument.getEntity(context, "entity");
+                MapLibServerUtil.setPossessedEntity(player, targetEntity);
+                context.getSource().sendSuccess(() -> Component.translatable("command.mapLib.camera.possess", targetEntity.getName().getString()), true);
+                return 1;
+            } catch (Exception e) {
+                context.getSource().sendFailure(Component.translatable("command.mapLib.camera.possess.failed"));
+                return 0;
+            }
+        });
+    }
+
+    private int unpossessEntity(CommandContext<CommandSourceStack> context) {
+        return this.defaultPlayerRunCommand(context, player -> {
+            MapLibServerUtil.clearPossessedEntity(player);
+            context.getSource().sendSuccess(() -> Component.translatable("command.mapLib.camera.unpossess"), true);
             return 1;
         });
     }

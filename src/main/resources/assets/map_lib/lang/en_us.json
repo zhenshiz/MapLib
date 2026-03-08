@@ -39,6 +39,9 @@
   "command.mapLib.sound.stop.posSound": "已停止坐标 [%s, %s, %s] 处的音响",
   "command.mapLib.sound.play.entitySound": "已在 %s 个实体上启动音响 [%s] (Vol: %s, Pitch: %s)",
   "command.mapLib.sound.play.posSound": "已在坐标 [%s, %s, %s] 启动音响 [%s] (Vol: %s, Pitch: %s)",
+  "command.mapLib.camera.possess": "Camera possessed entity: %s",
+  "command.mapLib.camera.possess.failed": "Possession failed, please check if the entity exists",
+  "command.mapLib.camera.unpossess": "Camera possession cancelled",
 
   "attribute.name.map_lib.multi_jump": "二段跳"
 }
